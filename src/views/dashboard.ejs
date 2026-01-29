@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: #333; }
+    .task { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+    .completed { background-color: #d4edda; }
+    .pending { background-color: #fff3cd; }
+    .deleted { background-color: #f8d7da; }
+    button { margin-left: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Welcome, <%= user.username %>!</h1>
+
+  <form action="/api/tasks" method="POST">
+    <input type="text" name="title" placeholder="Task title" required />
+    <input type="text" name="description" placeholder="Description" />
+    <button type="submit">Add Task</button>
+  </form>
+
+  <h2>Your Tasks</h2>
+  <div>
+    <a href="/dashboard?filter=pending">Pending</a> |
+    <a href="/dashboard?filter=completed">Completed</a> |
+    <a href="/dashboard?filter=deleted">Deleted</a> |
+    <a href="/dashboard">All</a>
+  </div>
+
+  <% tasks.forEach(task => { %>
+    <div class="task <%= task.status %>">
+      <strong><%= task.title %></strong> - <%= task.status %>
+      <p><%= task.description %></p>
+      <% if (task.status === "pending") { %>
+        <form action="/api/tasks/<%= task._id %>?_method=PUT" method="POST" style="display:inline;">
+          <button type="submit">Mark Completed</button>
+        </form>
+      <% } %>
+      <form action="/api/tasks/<%= task._id %>?_method=DELETE" method="POST" style="display:inline;">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  <% }) %>
+</body>
+</html>
