@@ -1,0 +1,144 @@
+/* Global body background */
+body {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1e3a8a, #1e40af); /* dark blue gradient */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Shared container */
+.page-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card style */
+.page-card {
+  background-color: #1e293b;
+  padding: 2.5rem;
+  width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  border: 3px solid #1e40af; /* ✅ thicker dark blue border */
+}
+
+/* Headings */
+.page-card h2 {
+  color: #ffffff;
+  font-size: 2rem; /* ✅ bigger font */
+  margin-bottom: 1.5rem;
+}
+
+/* Inputs */
+.page-card input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #475569;
+  outline: none;
+  font-size: 14px;
+}
+
+/* Buttons */
+.page-btn {
+  display: block;              /* ✅ ensures centering */
+  margin: 0 auto;              /* ✅ centers horizontally */
+  width: 60%;                  /* narrower for balance */
+  padding: 12px;
+  background-color: #1e40af;   /* ✅ dark blue button */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.page-btn:hover {
+  background-color: #1e3a8a;   /* slightly lighter on hover */
+}
+
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* full screen center */
+}
+
+.page-card {
+  background-color: #1e293b;
+  padding: 2.5rem;
+  width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  border: 3px solid #1e40af;
+}
+
+.page-card input {
+  display: block;
+  width: 100%;
+  margin: 0.5rem auto;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #475569;
+  font-size: 14px;
+}
+
+
+.page-card {
+  background-color: #1e293b;
+  padding: 3rem;              /* ✅ more padding inside card */
+  width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  border: 3px solid #1e40af;
+}
+
+.page-card input {
+  display: block;
+  width: 100%;
+  margin: 0.75rem auto;       /* ✅ more spacing between fields */
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #475569;
+  font-size: 14px;
+}
+
+.page-btn {
+  display: block;
+  margin: 1.5rem auto 0 auto; /* ✅ space above button */
+  width: 60%;
+  padding: 12px;
+  background-color: #1e40af;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.page-btn:hover {
+  background-color: #1e3a8a;
+}
+
+.login-link {
+  text-align: left;           /* ✅ align left */
+  margin-top: 1rem;
+  color: #fff;
+}
+.login-link a {
+  color: #93c5fd;             /* light blue link */
+  text-decoration: none;
+}
+.login-link a:hover {
+  text-decoration: underline;
+}
