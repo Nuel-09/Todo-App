@@ -14,20 +14,49 @@ const User = require("../models/User");
 exports.register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
-
+    if (!username || !email || !password) {
+      return res.status(400).json({
+        error: "All fields (username, email, password) are required.",
+      });
+    }
     // Check if user exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ error: "User already exists" });
+      return res
+        .status(400)
+        .json({ error: "User already exists with this email." });
     }
-
     // ✅ No manual hashing here — handled by User.js pre-save hook
     const newUser = new User({ username, email, password });
     await newUser.save();
-
-    res.status(201).json({ message: "Registration successful" });
+    // Generate JWT token
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+    res.status(201).json({
+      message: "Registration successful",
+      token,
+      userId: newUser._id,
+      user: {
+        username: newUser.username,
+        email: newUser.email,
+        _id: newUser._id,
+      },
+    });
   } catch (err) {
-    res.status(500).json({ error: "Registration failed", details: err.message });
+    // Mongoose validation errors
+    if (err.name === "ValidationError") {
+      return res
+        .status(400)
+        .json({ error: "Validation failed", details: err.errors });
+    }
+    // Duplicate key error (unique email)
+    if (err.code === 11000) {
+      return res.status(400).json({ error: "Email already in use." });
+    }
+    res
+      .status(500)
+      .json({ error: "Registration failed", details: err.message });
   }
 };
 
@@ -40,11 +69,9 @@ exports.login = async (req, res) => {
   try {
     const { usernameOrEmail, password } = req.body;
 
-
-
     // Find user by username OR email
     const user = await User.findOne({
-      $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }]
+      $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
     });
 
     if (!user) {
@@ -65,7 +92,7 @@ exports.login = async (req, res) => {
     res.json({
       message: "Login successful",
       token,
-      userId: user._id
+      userId: user._id,
     });
   } catch (err) {
     res.status(400).json({ error: "Login failed", details: err.message });

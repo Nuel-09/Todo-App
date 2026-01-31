@@ -7,7 +7,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const morgan = require("morgan");
-const dotenv = require("dotenv");   // ✅ require first
+const dotenv = require("dotenv"); // ✅ require first
 const methodOverride = require("method-override");
 const session = require("express-session");
 const logger = require("./utils/logger");
@@ -60,21 +60,11 @@ app.use(session(sessionConfig));
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
 
-// ==================== VIEW ENGINE SETUP ====================
-
-app.set("view engine", "ejs");
-app.set("views", __dirname + "/views");
-
 // ==================== ROOT ROUTE ====================
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Todo App! The API is live 🚀");
 });
-
-// ==================== VIEW ROUTES ====================
-
-const viewRoutes = require("./routes/viewRoutes");
-app.use("/", viewRoutes);
 
 // ==================== ERROR HANDLING ====================
 
@@ -90,13 +80,9 @@ if (process.env.NODE_ENV !== "test") {
   }
 
   mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB connected"))
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
-
+    .connect(process.env.MONGO_URI)
+    .then(() => console.log("✅ MongoDB connected"))
+    .catch((err) => console.error("❌ MongoDB connection error:", err));
 }
 
 module.exports = app;
-
-
-

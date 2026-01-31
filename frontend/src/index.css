@@ -1,7 +1,7 @@
 /* Global body background */
 body {
   min-height: 100vh;
-  background: linear-gradient(180deg, #1e3a8a, #1e40af); /* dark blue gradient */
+  background: linear-gradient(200deg, #f6e9e0, #cca786); /* dark blue gradient */
   display: flex;
   align-items: center;
   justify-content: center;

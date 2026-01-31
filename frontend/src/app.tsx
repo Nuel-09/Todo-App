@@ -1,7 +1,12 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import TodoPage from "./pages/TodoPage";
+import Todo from "./pages/Task";
 
 export default function App() {
   return (
@@ -10,7 +15,7 @@ export default function App() {
         <Route path="/" element={<Navigate to="/login" />} /> {/* Redirect */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/todo" element={<TodoPage />} />
+        <Route path="/task" element={<Todo />} />
       </Routes>
     </Router>
   );
